@@ -11,7 +11,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   delay(1000);
-  WiFiMulti.addAP("Kokiri Forest", "mjaumjau");
+  WiFiMulti.addAP("SSID", "passord");
 }
 
 void loop() {
