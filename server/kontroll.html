@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Kontrollpanel</title>
+    <script>
+	(function() {
+		const fetch = new XMLHttpRequest();
+		fetch.open("GET", "/status", true);
+		fetch.onreadystatechange = function(){document.getElementById("status").innerHTML = "Status: " + fetch.responseText;};
+		fetch.send();
+	})();
+
+	var sendPost = function(param) {
+		const http = new XMLHttpRequest();
+		http.open("POST", param, true);
+		http.send();
+		document.getElementById("status").innerHTML = "Status: ".
+			concat(param === 'paa' ? "1" : "0");
+	}
+    </script>
+  </head>
+  <body>
+  	<p>Busskontroll</p>
+	<p id="status">Status: </p>
+	<button name="paa" onClick="sendPost('paa');">Paa</button>
+	<button name="av" onClick="sendPost('av');">av</button>
+  </body>
+</html>
