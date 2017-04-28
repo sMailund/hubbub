@@ -16,7 +16,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   delay(1000);
-  WiFiMulti.addAP("SSID", "PASSORD"); //sett inn SSID og passord her
+  WiFiMulti.addAP("hubbub", "hubbub17"); //sett inn SSID og passord her
 }
 
 void loop() {
