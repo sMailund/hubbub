@@ -1,16 +1,18 @@
 var http = require('http'); //importer http
-var fs = require('fs');
+var fs = require('fs'); //importer filsystem
 
-var config = require('./config');
+var config = require('./config'); //hent konfigurasjonsfil
 
 const PORT = config.port; //sett port
 const IP = config.ip; //set ip
 
-var isCalled = false;
+var isCalled = false; //denne endres hvis bussen er tilkalt
 
+//kalles naar en foresporsel er registrert
 function handleRequest(request, response){
     console.log("got request: " + request.url + request.method);
-    
+	
+    //behandle foresporsel
     switch(request.url) {
 	case '/':
 	    response.end();
@@ -48,8 +50,9 @@ function handleRequest(request, response){
     }
 }
 
-var server = http.createServer(handleRequest);
+var server = http.createServer(handleRequest); //start server
 
+//lytt til port
 server.listen(PORT, IP, function(){
     console.log("Server listening on: http://%s:%s", IP, PORT);
 });
