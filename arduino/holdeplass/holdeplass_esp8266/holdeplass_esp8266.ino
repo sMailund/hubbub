@@ -15,7 +15,7 @@ void setup() {
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
 
-  delay(1000);
+  delay(1000); //funker oftere hvis man venter litt foer man starter tilkoblingen
   WiFiMulti.addAP("hubbub", "hubbub17"); //sett inn SSID og passord her
 }
 
@@ -23,9 +23,11 @@ void loop() {
   // put your main code here, to run repeatedly:
   if (WiFiMulti.run() == WL_CONNECTED) {
 
+    //true hvis det er informasjon aa lese
     if (Serial.available() > 0) {
       incomingByte = Serial.read();
 
+      //behandle meldingen, det er ganske lesbart hva som skjer
       switch (incomingByte) {
         case ON:
           sendOn();
@@ -49,7 +51,7 @@ void loop() {
 void sendOn() {
   //Blink 1 gang
   blink1();
-  connectHTTP("http://95.85.58.5:8080/call");
+  connectHTTP("http://95.85.58.5:8080/call"); //send informasjon til webserver om at bussen er bestilt
 
 }
 
@@ -57,10 +59,11 @@ void sendOff() {
   //Blink 2 ganger
   blink1();
   blink1();
-  connectHTTP("http://95.85.58.5:8080/reset");
+  connectHTTP("http://95.85.58.5:8080/reset"); //send informasjon til webserver om at bussen er avbestilt
 
 }
 
+//metode for aa koble til gitt webadresse
 void connectHTTP(String adresse) {
   HTTPClient http;
   http.begin(adresse);
