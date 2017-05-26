@@ -17,33 +17,39 @@ function handleRequest(request, response){
 	case '/':
 	    response.end();
 	    break;
-        case '/call': 
+        case '/call':
+	    //bussen er tilkalt, sett isCalled
             isCalled = true;
             console.log('isCalled = ' + isCalled);
 	    response.end();
             break;
-        case '/reset': 
+        case '/reset':
+            //bussen er avbestilt, sett isCalled
             isCalled = false;
             console.log('isCalled = ' + isCalled);
 	    response.end();
             break;
         case '/status': 
-            response.write(isCalled ? '1' : '0');
+            response.write(isCalled ? '1' : '0'); //svarer tilbake med status
 	    response.end();
             break;
 	case '/controller':
+            //send kontrollpanel tilbake til nettleser, hovedsakelig for debug
 	    response.writeHead(200, {"Content-Type": "text/html"});
 	    fs.createReadStream("./kontroll.html").pipe(response);
 	    break;
 	case '/paa':
+            //bestilling fra kontrollpanel paa web, brukes til debug
 	    isCalled = true;
 	    response.end();
 	    break;
 	case '/av':
+	    //avbestilling fra kontrollpanel paa web, brukes til debug
 	    isCalled = false;
 	    response.end();
 	    break;
 	default:
+	    //404 not found
 	    response.statusCode = 404;
 	    response.write("404 not found");
 	    response.end();
