@@ -12,7 +12,7 @@ const uint16_t monoMode = 1;  //Mono setting 0=off, 3=max
 
 /* Pin setup */
 #define TRIGGER_COUNT 2
-const int ledPin = 5; //knapp for LED
+const int ledPin = 5; //pin for LED
 const int lydKnapp = 4;  //knapp for aa spille av lyd
 
 //konstanter for lesbarhet
