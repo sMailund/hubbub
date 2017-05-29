@@ -5,6 +5,10 @@
 
 ESP8266WiFiMulti WiFiMulti;
 
+//konstanter som gjoer koden mer lesbar
+const int ON = 100;
+const int OFF = 200;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200); //i tilfelle kommunikasjon med aruduino skal brukes
@@ -33,6 +37,7 @@ void loop() {
       } else if (svar.equals("0")) {
         //bussen er IKKE tilkalt
         digitalWrite(LED_BUILTIN, HIGH);
+        onIkkeTilkalt();
       } else {
         intervalBlink(500); //blink for serverside feil
       }
@@ -51,9 +56,14 @@ void loop() {
 }
 
 void onTilkalt() {
-  //placeholder
   //kalles naar bussen er tilkalt
-  //her ville tingene for aa interface med systemet paa bussen vaert
+  //her ville mer ting for aa interface med systemet paa bussen vaert
+  Serial.write(ON);
+}
+
+void onIkkeTilkalt() {
+  //kalles naar bussen IKKE er tilkalt
+  Serial.write(OFF);
 }
 
 //blink flere ganger i satt hastighet, betyr at noe er feil
