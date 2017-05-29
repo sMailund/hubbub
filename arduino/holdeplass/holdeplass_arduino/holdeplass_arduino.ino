@@ -5,8 +5,8 @@
 MFRC522 rfid(9, 8); // instans av RFID-klasse i driver. Parametre er pins.
 SoftwareSerial esp8266(5, 6); //instans av ESP8266-kommunikator (RX TX)
 
-int WIFI_turnOn = 10;
-int WIFI_turnOff = 11;
+int WIFI_turnOn = 1;
+int WIFI_turnOff = 2;
 int piezo = 3;
 
 boolean kortAktivert = false;
