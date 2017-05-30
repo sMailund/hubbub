@@ -47,16 +47,12 @@ void lyttTilKnapper() {
     kortAktivert = false; //deaktiver knappene igjen
     esp8266.write(100); //send byte med verdi 100 til ESP8266 (leses av modulen)
     Serial.println("trykket 1");
-    tone(piezo, 880); //spill av tone
-    delay(1000); //vent paa at brukeren slipper knappen (her trengs debounce)
-    noTone(piezo); //skru av tone
+    pip(880);
   } else if (digitalRead(WIFI_turnOff) == HIGH) {
     kortAktivert = false; //deaktiver knappene
     esp8266.write(200); //send byte med verdi 200 til ESP8266 (leses av modulen)
     Serial.println("trykket 2");
-    tone(piezo, 417); //spill av tone
-    delay(1000); //vent paa at brukeren slipper knappen (her trengs debounce)
-    noTone(piezo); //skru av tone
+    pip(417);
   } 
 }
 
@@ -68,9 +64,16 @@ void sjekkKort(){
 
   //koden som skjer naar kort brukes
   kortAktivert = true; //aktiver knappene
+  pip(800);
   
   //"debounce" paa kort. du kan holde kortet på så lenge du vil
   MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
   rfid.PICC_HaltA();
+}
+
+void pip(int frekvens) {
+  tone(piezo, frekvens); //spill av tone
+  delay(500); //vent paa at brukeren slipper knappen (her trengs debounce)
+  noTone(piezo); //skru av tone
 }
 
